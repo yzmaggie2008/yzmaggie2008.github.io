@@ -374,6 +374,7 @@ function initMap() {
      	});
      }  
 
+    
 function googleMapError() {
     alert("Google Map could not be loaded at this moment. Please try again later");
 }
@@ -389,12 +390,12 @@ var objLocation = function(data){
     for (var i = 0; i < markers.length; i++) {
       markers[i].setVisible(false);
     }
-  };
+  }
 
 //viewModel function
 var viewModel = function(){
 	var self = this;
-
+  
   this.isShown = ko.observable(true);
 	this.toggleMenu = function(){
 		this.isShown(!this.isShown());
@@ -419,6 +420,10 @@ var viewModel = function(){
 		});
 	};
 	this.defaultList();
+
+  self.setAttraction = function(location){
+    google.maps.event.trigger(location.marker, 'click');
+  };
 
 	this.update = function(){
        this.listRestaurants().forEach(function(restaurant){
